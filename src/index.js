@@ -1,9 +1,12 @@
-import React, {Component} from 'react'
+import * as React from 'react'
 
-export default class extends Component {
-  render() {
-    return <div>
-      <h2>Welcome to React components</h2>
-    </div>
+const branch = (test, ifTrueComponent) => ifFalseComponent => {
+  return props => {
+    if (test(props)) {
+      return React.createElement(ifTrueComponent, props)
+    }
+    return React.createElement(ifFalseComponent, props)
   }
 }
+
+export default branch
