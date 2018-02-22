@@ -1,10 +1,10 @@
 import expect from 'expect'
 import React from 'react'
-import {render, unmountComponentAtNode} from 'react-dom'
+import { render, unmountComponentAtNode } from 'react-dom'
 
-import Component from 'src/'
+import branch from 'src/'
 
-describe('Component', () => {
+describe('Branch HOC', () => {
   let node
 
   beforeEach(() => {
@@ -15,9 +15,33 @@ describe('Component', () => {
     unmountComponentAtNode(node)
   })
 
-  it('displays a welcome message', () => {
-    render(<Component/>, node, () => {
-      expect(node.innerHTML).toContain('Welcome to React components')
+  it('test true -> render true component', () => {
+    // arrange
+    const fn = () => true
+    const trueComponent = () => <div>true</div>
+    const falseComponent = () => <div>false</div>
+
+    // act
+    const Result = branch(fn, trueComponent)(falseComponent)
+
+    // assert
+    render(<Result />, node, () => {
+      expect(node.innerHTML).toContain('true')
+    })
+  })
+
+  it('test false -> render false component', () => {
+    // arrange
+    const fn = () => false
+    const trueComponent = () => <div>true</div>
+    const falseComponent = () => <div>false</div>
+
+    // act
+    const Result = branch(fn, trueComponent)(falseComponent)
+
+    // assert
+    render(<Result />, node, () => {
+      expect(node.innerHTML).toContain('false')
     })
   })
 })
