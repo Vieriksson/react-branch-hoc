@@ -1,7 +1,8 @@
 {
   "name": "react-branch-hoc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "react-branch-hoc React component",
+  "typings": "typings/index.ts",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": ["css", "es", "lib", "umd"],
